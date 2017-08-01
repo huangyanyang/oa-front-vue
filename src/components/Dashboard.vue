@@ -2,7 +2,7 @@
   <div :class="['wrapper', classes]">
     <header class="main-header">
       <span class="logo-mini">
-        <a href="/"><img src="/static/img/copilot-logo-white.svg" alt="Logo" class="img-responsive center-block logo"></a>
+        <a href="/"><img src="http://www.wens.com.cn/statics/wens_com_cn/img/global/hd_logo.png" alt="Logo" class="img-responsive center-block logo"></a>
       </span>
       <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->

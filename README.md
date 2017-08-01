@@ -1,30 +1,38 @@
-# oa_front
+# wens-oa-front-vue
 
-> A Vue.js project
+## 运行前配置
+编辑dev_build.sh文件，设置backend_path指向本机的ws_oa_front目录。
 
-## Build Setup
+## 运行步骤
 
 ``` bash
-# install dependencies
+# 安装依赖包
 npm install
 
-# serve with hot reload at localhost:8080
+# 启动本地测试
 npm run dev
 
-# build for production with minification
+# 发布非压缩版本到odoo的static目录
+./dev_build.sh
+
+# 发布压缩版本到odoo的static目录
+./prod_build.sh
+
+# 发布压缩版本到dist目录
 npm run build
 
-# build for production and view the bundle analyzer report
+# 编译发布到odoo的static目录，并生产编译报告
 npm run build --report
 
-# run unit tests
+# unit test
 npm run unit
 
-# run e2e tests
+# e2e test
 npm run e2e
 
-# run all tests
+# test all
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+更多的功能
+[guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
