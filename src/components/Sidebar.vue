@@ -4,21 +4,6 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
 
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img :src="pictureUrl" />
-        </div>
-        <div class="pull-left info">
-          <div>
-            <p class="white">{{ displayName }}</p>
-          </div>
-          <a href="javascript:;">
-            <i class="fa fa-circle text-success"></i> Online
-          </a>
-        </div>
-      </div>
-
       <!-- search form (Optional) -->
       <form v-on:submit.prevent class="sidebar-form">
         <div class="input-group">
@@ -39,7 +24,7 @@
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
-      <sidebar-menu />
+      <sidebar-menu @onSidebarMenuChange="onSidebarMenuChange"/>
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
@@ -51,7 +36,13 @@
   export default {
     name: 'Sidebar',
     props: ['displayName', 'pictureUrl'],
-    components: { SidebarMenu }
+    components: { SidebarMenu },
+    methods: {
+      onSidebarMenuChange (menuId) {
+        console.log('onSidebarMenuChange...')
+        this.$emit('onSidebarMenuChange', menuId)
+      }
+    }
   }
 </script>
 <style>

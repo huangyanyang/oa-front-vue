@@ -1,16 +1,18 @@
 <template>
   <ul class="sidebar-menu">
-    <li class="header">TOOLS</li>
+    <li class="header">通用</li>
     <li class="active pageLink" v-on:click="toggleMenu">
-      <router-link to="/"><i class="fa fa-desktop"></i>
+      <a v-on:click="onMenuClick(0)" :id="0">
+        <i class="fa fa-desktop"></i>
         <span class="page">Dashboard</span>
-      </router-link>
+      </a>
     </li>
     <li class="pageLink" v-on:click="toggleMenu">
       <router-link to="/tables"><i class="fa fa-table"></i>
         <span class="page">Tables</span>
       </router-link>
     </li>
+
 
     <li class="header">ME</li>
     <li class="pageLink" v-on:click="toggleMenu">
@@ -87,6 +89,11 @@
 <script>
   export default {
     name: 'SidebarName',
+    data () {
+      return {
+        menus: []
+      }
+    },
     methods: {
       toggleMenu (event) {
         // remove active from li
@@ -98,6 +105,10 @@
         // window.$('li.pageLink.active').removeClass('active')
         // Add it to the item that was clicked
         event.toElement.parentElement.className = 'pageLink active'
+      },
+      onMenuClick (menuId) {
+        console.log('onMenuClick:')
+        this.$emit('onSidebarMenuChange', menuId)
       }
     }
   }

@@ -1,166 +1,242 @@
 <template>
-  <div :class="['wrapper', classes]">
-    <header class="main-header">
-      <span class="logo-mini">
-        <a href="/"><img src="http://www.wens.com.cn/statics/wens_com_cn/img/global/hd_logo.png" alt="Logo" class="img-responsive center-block logo"></a>
-      </span>
-      <nav class="navbar navbar-static-top" role="navigation">
-        <!-- Sidebar toggle button-->
-        <a href="javascript:;" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          <span class="sr-only">Toggle navigation</span>
-        </a>
-        <!-- Navbar Right Menu -->
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- Messages-->
-            <li class="dropdown messages-menu">
-              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-envelope-o"></i>
-                <span class="label label-success">1</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">You have 2</li>
-                <li>
-                  <!-- inner menu: contains the messages -->
-                  <ul class="menu">
-                    <li>
-                      <!-- start message -->
-                      <a href="javascript:;">
-                        <!-- Message title and timestamp -->
-                        <h4>
-                          Support Team
-                          <small>
-                            <i class="fa fa-clock-o"></i> 5 mins</small>
-                        </h4>
-                        <!-- The message -->
-                        <p>Why not consider this a test message?</p>
-                      </a>
-                    </li>
-                    <!-- end message -->
-                  </ul>
-                  <!-- /.menu -->
-                </li>
-                <li class="footer">
-                  <a href="javascript:;">See All Messages</a>
-                </li>
-              </ul>
-            </li>
-            <!-- /.messages-menu -->
+  <!-- Main content -->
+  <section class="content">
+    <!-- Info boxes -->
+    <div class="row">
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> CoPilot is open source!</h4>
+        Click on icon to check it out on github. <a href="https://github.com/misterGF/CoPilot" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <info-box :name="'毛利'" :value="'90%'" :url="'http://baidu.com'" :bgColor="'bg-aqua'" :icon="'ion-ios-gear-outline'"></info-box>
+      </div>
+      <!-- /.col -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <info-box :name="'点赞'" :value="'41,410'" :url="'http://baidu.com'" :bgColor="'bg-red'" :icon="'fa-google-plus'"></info-box>
+      </div>
+      <!-- /.col -->
 
-            <!-- Notifications Menu -->
-            <li class="dropdown notifications-menu">
-              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell-o"></i>
-                <span class="label label-warning">2</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">You have 2 notification(s)</li>
-                <li>
-                  <!-- Inner Menu: contains the notifications -->
-                  <ul class="menu">
-                    <li>
-                      <!-- start notification -->
-                      <a href="javascript:;">
-                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                      </a>
-                    </li>
-                    <!-- end notification -->
-                  </ul>
-                </li>
-                <li class="footer">
-                  <a href="javascript:;">View all</a>
-                </li>
-              </ul>
-            </li>
+      <!-- fix for small devices only -->
+      <div class="clearfix visible-sm-block"></div>
 
-            <!-- Tasks Menu -->
-            <li class="dropdown tasks-menu">
-              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-flag-o"></i>
-                <span class="label label-danger">8</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">You have 8 task(s)</li>
-                <li>
-                  <!-- Inner menu: contains the tasks -->
-                  <ul class="menu">
-                    <li>
-                      <!-- Task item -->
-                      <a href="javascript:;">
-                        <!-- Task title and progress text -->
-                        <h3>
-                          Design some buttons
-                          <small class="pull-right">20%</small>
-                        </h3>
-                        <!-- The progress bar -->
-                        <div class="progress xs">
-                          <!-- Change the css width attribute to simulate progress -->
-                          <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                            <span class="sr-only">20% Complete</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <!-- end task item -->
-                  </ul>
-                </li>
-                <li class="footer">
-                  <a href="javascript:;">View all tasks</a>
-                </li>
-              </ul>
-            </li>
-
-            <!-- User Account Menu -->
-            <li class="dropdown user user-menu">
-              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                <!-- The user image in the navbar-->
-                <img v-bind:src="'/static/img/copilot-logo-white.svg'" class="user-image" alt="User Image">
-                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">DEMO</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <sidebar :display-name="'Sidebar'" :picture-url="'/static/img/copilot-logo-white.svg'"></sidebar>
-    <div class="content-wrapper">
-      <section class="content-header">
-        <h1>a
-          <small>b</small></h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="javascript:;">
-              <i class="fa fa-home"></i>Home</a>
-          </li>
-          <li class="active">adfad</li>
-        </ol>
-      </section>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <info-box :name="'销售'" :value="223223" :bgColor="'bg-green'" :icon="'ion-ios-cart-outline'"></info-box>
+      </div>
+      <!-- /.col -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <info-box :name="'新用户'" :value="2000" :bgColor="'bg-yellow'" :icon="'ion-ios-people-outline'"></info-box>
+      </div>
+      <!-- /.col -->
     </div>
-    <footer class="main-footer">
-      <strong>Copyright &copy; {{year}}
-        <a href="http://www.wens.com.cn" target="_blank">WENS</a>.</strong> All rights reserved.
-    </footer>
-  </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="box-title"></h3>
+            <div class="box-body">
+              <div class="col-sm-6 col-xs-12">
+                <p class="text-center">
+                  <strong>Web Traffic Overview</strong>
+                </p>
+                <canvas id="trafficBar" ></canvas>
+              </div>
+              <hr class="visible-xs-block">
+              <div class="col-sm-6 col-xs-12">
+                <p class="text-center">
+                  <strong>Language Overview</strong>
+                </p>
+                <canvas id="languagePie"></canvas>
+              </div>
+            </div>
+          </div>
+          <small class="space"><b>Pro Tip</b> Don"t forget to star us on github!</small>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Main row -->
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-yellow">
+          <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Inventory</span>
+            <span class="info-box-number">5,200</span>
+
+            <div class="progress">
+              <div class="progress-bar" style="width: 50%"></div>
+            </div>
+            <span class="progress-description">
+                  50% Increase
+                </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-green">
+          <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Mentions</span>
+            <span class="info-box-number">92,050</span>
+
+            <div class="progress">
+              <div class="progress-bar" style="width: 20%"></div>
+            </div>
+            <span class="progress-description">
+                  20% Increase
+                </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-red">
+          <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Downloads</span>
+            <span class="info-box-number">114,381</span>
+
+            <div class="progress">
+              <div class="progress-bar" style="width: 70%"></div>
+            </div>
+            <span class="progress-description">
+                  70% Increase
+                </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-aqua">
+          <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Direct Messages</span>
+            <span class="info-box-number">163,921</span>
+
+            <div class="progress">
+              <div class="progress-bar" style="width: 40%"></div>
+            </div>
+            <span class="progress-description">
+                  40% Increase
+                </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
 </template>
 
 <script>
-  import config from '@/config'
-  import Sidebar from '@/components/Sidebar'
+  import Chart from 'chart.js'
+  import InfoBox from '@/widgets/InfoBox'
 
   export default {
     name: 'Dashboard',
     components: {
-      Sidebar
+      InfoBox
     },
-    data: function () {
+    data () {
       return {
-        year: new Date().getFullYear(),
-        classes: {
-          fixed_layout: config.fixedLayout,
-          hide_logo: config.hideLogoOnMobile
+        generateRandomNumbers (numbers, max, min) {
+          var a = []
+          for (var i = 0; i < numbers; i++) {
+            a.push(Math.floor(Math.random() * (max - min + 1)) + max)
+          }
+          return a
         }
       }
+    },
+    computed: {
+      coPilotNumbers () {
+        return this.generateRandomNumbers(12, 1000000, 10000)
+      },
+      personalNumbers () {
+        return this.generateRandomNumbers(12, 1000000, 10000)
+      },
+      isMobile () {
+        return (window.innerWidth <= 800 && window.innerHeight <= 600)
+      }
+    },
+    mounted () {
+      this.$nextTick(() => {
+        var ctx = document.getElementById('trafficBar').getContext('2d')
+        var config = {
+          type: 'line',
+          data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+              label: 'CoPilot',
+              fill: false,
+              borderColor: '#284184',
+              pointBackgroundColor: '#284184',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+              data: this.coPilotNumbers
+            }, {
+              label: 'Personal Site',
+              borderColor: '#4BC0C0',
+              pointBackgroundColor: '#4BC0C0',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+              data: this.personalNumbers
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: !this.isMobile,
+            legend: {
+              position: 'bottom',
+              display: true
+            },
+            tooltips: {
+              mode: 'label',
+              xPadding: 10,
+              yPadding: 10,
+              bodySpacing: 10
+            }
+          }
+        }
+
+        new Chart(ctx, config) // eslint-disable-line no-new
+
+        var pieChartCanvas = document.getElementById('languagePie').getContext('2d')
+        var pieConfig = {
+          type: 'pie',
+          data: {
+            labels: ['HTML', 'JavaScript', 'CSS'],
+            datasets: [{
+              data: [56.6, 37.7, 4.1],
+              backgroundColor: ['#00a65a', '#f39c12', '#00c0ef'],
+              hoverBackgroundColor: ['#00a65a', '#f39c12', '#00c0ef']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: !this.isMobile,
+            legend: {
+              position: 'bottom',
+              display: true
+            }
+          }
+        }
+
+        new Chart(pieChartCanvas, pieConfig) // eslint-disable-line no-new
+      })
     }
   }
 </script>
+<style>
+  .fullCanvas {
+    width: 100%;
+  }
+</style>
