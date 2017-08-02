@@ -8,28 +8,52 @@
         <h4><i class="icon fa fa-check"></i> CoPilot is open source!</h4>
         Click on icon to check it out on github. <a href="https://github.com/misterGF/CoPilot" target="_blank"><i class="fa fa-github fa-2x"></i></a>
       </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <info-box :name="'毛利'" :value="'90%'" :url="'http://baidu.com'" :bgColor="'bg-aqua'" :icon="'ion-ios-gear-outline'"></info-box>
+    </div>
+    <div class="row" v-for="row in rows">
+      <div v-for="col in row.columns" :class="row.classes">
+          <info-box v-if="col.widget === 'info-box'" :name="fromDashboard(col.id, 'name')" :value="fromDashboard(col.id, 'value')" :url="fromDashboard(col.id, 'url')" :bgColor="fromDashboard(col.id, 'bg')" :icon="fromDashboard(col.id, 'icon')"></info-box>
       </div>
-      <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <info-box :name="'点赞'" :value="'41,410'" :url="'http://baidu.com'" :bgColor="'bg-red'" :icon="'fa-google-plus'"></info-box>
-      </div>
-      <!-- /.col -->
 
-      <!-- fix for small devices only -->
-      <div class="clearfix visible-sm-block"></div>
 
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <info-box :name="'销售'" :value="223223" :bgColor="'bg-green'" :icon="'ion-ios-cart-outline'"></info-box>
-      </div>
-      <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <info-box :name="'新用户'" :value="2000" :bgColor="'bg-yellow'" :icon="'ion-ios-people-outline'"></info-box>
-      </div>
       <!-- /.col -->
     </div>
     <!-- /.row -->
+
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="box box-default" data-widget="box-widget">
+          <div class="box-header">
+            <h3 class="box-title">Box Tools</h3>
+            <div class="box-tools">
+              <!-- This will cause the box to be removed when clicked -->
+              <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+              <!-- This will cause the box to collapse when clicked -->
+              <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+            </div>
+          </div>
+          <div class="box-body">
+            <Table stripe :columns="columns1" :data="data1"></Table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="box box-default" data-widget="box-widget">
+          <div class="box-header">
+            <h3 class="box-title">Box Tools</h3>
+            <div class="box-tools">
+              <!-- This will cause the box to be removed when clicked -->
+              <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+              <!-- This will cause the box to collapse when clicked -->
+              <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+            </div>
+          </div>
+          <div class="box-body">
+            HELL
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-xs-12">
@@ -79,58 +103,13 @@
         </div>
       </div>
       <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-green">
-          <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Mentions</span>
-            <span class="info-box-number">92,050</span>
-
-            <div class="progress">
-              <div class="progress-bar" style="width: 20%"></div>
-            </div>
-            <span class="progress-description">
-                  20% Increase
-                </span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
+        <info-box-progress @onLoaded="onLoaded" :icon="'ion-ios-heart-outline'" :name="'增长'" :value="'23,2323'" :bgColor="'bg-green'" :progress="70" :description="'70%增长'" :url="'http://baidu.com'"></info-box-progress>
       </div>
       <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-red">
-          <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Downloads</span>
-            <span class="info-box-number">114,381</span>
-
-            <div class="progress">
-              <div class="progress-bar" style="width: 70%"></div>
-            </div>
-            <span class="progress-description">
-                  70% Increase
-                </span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
+        <info-box-progress :name="'增长'" :value="'23,2323'" :bgColor="'bg-red'" :progress="70" :description="'70%增长'" :url="'http://baidu.com'"></info-box-progress>
       </div>
       <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-aqua">
-          <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Direct Messages</span>
-            <span class="info-box-number">163,921</span>
-
-            <div class="progress">
-              <div class="progress-bar" style="width: 40%"></div>
-            </div>
-            <span class="progress-description">
-                  40% Increase
-                </span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
+        <info-box-progress :icon="'ion-ios-heart-outline'" :name="'增长'" :value="'23,2323'" :bgColor="'bg-blue'" :progress="20" :description="'20%增长'" :url="'http://baidu.com'"></info-box-progress>
       </div>
     </div>
     <!-- /.row -->
@@ -141,21 +120,142 @@
 <script>
   import Chart from 'chart.js'
   import InfoBox from '@/widgets/InfoBox'
+  import InfoBoxProgress from '@/widgets/InfoBoxProgress'
 
   export default {
     name: 'Dashboard',
     components: {
-      InfoBox
+      InfoBox,
+      InfoBoxProgress
+    },
+    methods: {
+      rowClassName (row, index) {
+//        if (index === 1) {
+//          return 'demo-table-info-row'
+//        } else if (index === 3) {
+//          return 'demo-table-error-row'
+//        }
+        return ''
+      },
+      loadDataOne (one, tow) {
+        console.log('loadDataOne:' + one + ':' + tow)
+      },
+      onLoaded (p) {
+        console.log('onLoaded:' + p)
+      },
+      fromDashboard (id, field) {
+        if (this.dashboard[id]) {
+          return this.dashboard[id][field]
+        } else {
+          return ''
+        }
+      }
     },
     data () {
       return {
+        rows: [
+          { columns: [
+              {name: 'dd', id: 1, widget: 'info-box'},
+              {name: 'dd', id: 2, widget: 'info-box'},
+              {name: 'dd', id: 3, widget: 'info-box'},
+              {name: 'dd', id: 4, widget: 'info-box'},
+              {name: 'dd', id: 5, widget: 'info-box'}],
+            classes: 'col-md-3 col-sm-6 col-xs-12'
+          }
+        ],
+        dashboard: {
+          1: {name: 'hello', value: '90%', url: 'http://www.baidu.com', bg: 'bg-blue', icon: 'ion-ios-gear-outline'},
+          2: {name: '销售', value: '23,2322', url: 'http://www.baidu.com', bg: 'bg-red', icon: 'ion-ios-people-outline'},
+          3: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bg: 'bg-green', icon: 'ion-ios-cart-outline'},
+          4: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bg: 'bg-green', icon: 'ion-ios-cart-outline'}
+        },
         generateRandomNumbers (numbers, max, min) {
           var a = []
           for (var i = 0; i < numbers; i++) {
             a.push(Math.floor(Math.random() * (max - min + 1)) + max)
           }
           return a
-        }
+        },
+        columns1: [
+          {
+            title: '姓名',
+            key: 'name'
+          },
+          {
+            title: '年龄',
+            key: 'age'
+          },
+          {
+            title: '地址',
+            key: 'address'
+          }
+        ],
+        columns9: [
+          {
+            title: '姓名',
+            key: 'name'
+          },
+          {
+            title: '年龄',
+            key: 'age',
+            className: 'demo-table-info-column'
+          },
+          {
+            title: '地址',
+            key: 'address'
+          }
+        ],
+        data1: [
+          {
+            name: '王小明',
+            age: 18,
+            address: '北京市朝阳区芍药居'
+          },
+          {
+            name: '张小刚',
+            age: 25,
+            address: '北京市海淀区西二旗'
+          },
+          {
+            name: '李小红',
+            age: 30,
+            address: '上海市浦东新区世纪大道'
+          },
+          {
+            name: '周小伟',
+            age: 26,
+            address: '深圳市南山区深南大道'
+          }
+        ],
+        data8: [
+          {
+            name: '王小明',
+            age: 18,
+            address: '北京市朝阳区芍药居'
+          },
+          {
+            name: '张小刚',
+            age: 25,
+            address: '北京市海淀区西二旗',
+            cellClassName: {
+              age: 'demo-table-info-cell-age',
+              address: 'demo-table-info-cell-address'
+            }
+          },
+          {
+            name: '李小红',
+            age: 30,
+            address: '上海市浦东新区世纪大道'
+          },
+          {
+            name: '周小伟',
+            age: 26,
+            address: '深圳市南山区深南大道',
+            cellClassName: {
+              name: 'demo-table-info-cell-name'
+            }
+          }
+        ]
       }
     },
     computed: {
@@ -238,5 +338,29 @@
 <style>
   .fullCanvas {
     width: 100%;
+  }
+  .ivu-table .demo-table-info-row td{
+    background-color: #2db7f5;
+    color: #fff;
+  }
+  .ivu-table .demo-table-error-row td{
+    background-color: #ff6600;
+    color: #fff;
+  }
+  .ivu-table td.demo-table-info-column{
+    background-color: #2db7f5;
+    color: #fff;
+  }
+  .ivu-table .demo-table-info-cell-name {
+    background-color: #2db7f5;
+    color: #fff;
+  }
+  .ivu-table .demo-table-info-cell-age {
+    background-color: #ff6600;
+    color: #fff;
+  }
+  .ivu-table .demo-table-info-cell-address {
+    background-color: #187;
+    color: #fff;
   }
 </style>

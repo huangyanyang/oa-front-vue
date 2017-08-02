@@ -149,6 +149,7 @@
   import config from '@/config'
   import Sidebar from '@/components/Sidebar'
   import Dashboard from '@/components/Dashboard'
+
   export default {
     name: 'Home',
     components: {
