@@ -11,7 +11,8 @@
     </div>
     <div class="row" v-for="row in rows">
       <div v-for="col in row.columns" :class="row.classes">
-          <info-box v-if="col.widget === 'info-box'" :name="fromDashboard(col.id, 'name')" :value="fromDashboard(col.id, 'value')" :url="fromDashboard(col.id, 'url')" :bgColor="fromDashboard(col.id, 'bg')" :icon="fromDashboard(col.id, 'icon')"></info-box>
+          <info-box v-if="col.widget === 'info-box'" :name="fromDashboard(col.id, 'name')" :value="fromDashboard(col.id, 'value')" :url="fromDashboard(col.id, 'url')" :bgColor="fromDashboard(col.id, 'bgColor')" :icon="fromDashboard(col.id, 'icon')"></info-box>
+          <info-box-progress v-else-if="col.widget === 'info-box-progress'" :name="fromDashboard(col.id, 'name')" :value="fromDashboard(col.id, 'value')" :url="fromDashboard(col.id, 'url')" :bgColor="fromDashboard(col.id, 'bgColor')" :icon="fromDashboard(col.id, 'icon')" :progress="fromDashboard(col.id, 'progress')" :description="fromDashboard(col.id, 'description')"></info-box-progress>
       </div>
 
 
@@ -158,16 +159,23 @@
               {name: 'dd', id: 1, widget: 'info-box'},
               {name: 'dd', id: 2, widget: 'info-box'},
               {name: 'dd', id: 3, widget: 'info-box'},
-              {name: 'dd', id: 4, widget: 'info-box'},
-              {name: 'dd', id: 5, widget: 'info-box'}],
+              {name: 'dd', id: 4, widget: 'info-box'}],
+            classes: 'col-md-3 col-sm-6 col-xs-12'
+          },
+          { columns: [
+            {name: 'dd', id: 6, widget: 'info-box-progress'},
+            {name: 'dd', id: 7, widget: 'info-box-progress'},
+            {name: 'dd', id: 8, widget: 'info-box-progress'},
+            {name: 'dd', id: 9, widget: 'info-box-progress'}],
             classes: 'col-md-3 col-sm-6 col-xs-12'
           }
         ],
         dashboard: {
-          1: {name: 'hello', value: '90%', url: 'http://www.baidu.com', bg: 'bg-blue', icon: 'ion-ios-gear-outline'},
-          2: {name: '销售', value: '23,2322', url: 'http://www.baidu.com', bg: 'bg-red', icon: 'ion-ios-people-outline'},
-          3: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bg: 'bg-green', icon: 'ion-ios-cart-outline'},
-          4: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bg: 'bg-green', icon: 'ion-ios-cart-outline'}
+          1: {name: 'hello', value: '90%', url: 'http://www.baidu.com', bgColor: 'bg-blue', icon: 'ion-ios-gear-outline'},
+          2: {name: '销售', value: '23,2322', url: 'http://www.baidu.com', bgColor: 'bg-red', icon: 'ion-ios-people-outline'},
+          3: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bgColor: 'bg-green', icon: 'ion-ios-cart-outline'},
+          4: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bgColor: 'bg-green', icon: 'ion-ios-cart-outline'},
+          6: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bgColor: 'bg-green', icon: 'ion-ios-cart-outline', progress: '10%', description: '测试'}
         },
         generateRandomNumbers (numbers, max, min) {
           var a = []
