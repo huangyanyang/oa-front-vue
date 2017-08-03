@@ -21,7 +21,7 @@
 <script>
   export default {
     name: 'InfoBoxProgress',
-    props: ['name', 'value', 'url', 'bgColor', 'icon', 'progress', 'description', 'loadData'],
+    props: ['name', 'value', 'url', 'bgColor', 'icon', 'progress', 'description'],
     mounted () {
       console.log('emit.......')
       this.$emit('onLoaded', 111)

@@ -11,8 +11,9 @@
     </div>
     <div class="row" v-for="row in rows">
       <div v-for="col in row.columns" :class="row.classes">
-          <info-box v-if="col.widget === 'info-box'" :name="fromDashboard(col.id, 'name')" :value="fromDashboard(col.id, 'value')" :url="fromDashboard(col.id, 'url')" :bgColor="fromDashboard(col.id, 'bgColor')" :icon="fromDashboard(col.id, 'icon')"></info-box>
-          <info-box-progress v-else-if="col.widget === 'info-box-progress'" :name="fromDashboard(col.id, 'name')" :value="fromDashboard(col.id, 'value')" :url="fromDashboard(col.id, 'url')" :bgColor="fromDashboard(col.id, 'bgColor')" :icon="fromDashboard(col.id, 'icon')" :progress="fromDashboard(col.id, 'progress')" :description="fromDashboard(col.id, 'description')"></info-box-progress>
+        <info-box v-if="col.widget === 'info-box'" :name="fromDashboard(col.id, 'name')" :value="fromDashboard(col.id, 'value')" :url="fromDashboard(col.id, 'url')" :bgColor="fromDashboard(col.id, 'bgColor')" :icon="fromDashboard(col.id, 'icon')"></info-box>
+        <info-box-progress v-else-if="col.widget === 'info-box-progress'" :name="fromDashboard(col.id, 'name')" :value="fromDashboard(col.id, 'value')" :url="fromDashboard(col.id, 'url')" :bgColor="fromDashboard(col.id, 'bgColor')" :icon="fromDashboard(col.id, 'icon')" :progress="fromDashboard(col.id, 'progress')" :description="fromDashboard(col.id, 'description')"></info-box-progress>
+        <box-frame v-else-if="col.widget === 'box-frame'" :title="fromDashboard(col.id, 'title')" :url="fromDashboard(col.id, 'url')" :height="fromDashboard(col.id, 'height')"></box-frame>
       </div>
 
 
@@ -122,12 +123,14 @@
   import Chart from 'chart.js'
   import InfoBox from '@/widgets/InfoBox'
   import InfoBoxProgress from '@/widgets/InfoBoxProgress'
+  import BoxFrame from '@/widgets/BoxFrame'
 
   export default {
     name: 'Dashboard',
     components: {
       InfoBox,
-      InfoBoxProgress
+      InfoBoxProgress,
+      BoxFrame
     },
     methods: {
       rowClassName (row, index) {
@@ -168,6 +171,15 @@
             {name: 'dd', id: 8, widget: 'info-box-progress'},
             {name: 'dd', id: 9, widget: 'info-box-progress'}],
             classes: 'col-md-3 col-sm-6 col-xs-12'
+          },
+          { columns: [
+            {name: 'dd', id: 10, widget: 'box-frame'}],
+            classes: 'col-xs-12'
+          },
+          { columns: [
+            {name: 'dd', id: 11, widget: 'box-frame'},
+            {name: 'dd', id: 12, widget: 'box-frame'}],
+            classes: 'col-sm-6 col-xs-12'
           }
         ],
         dashboard: {
@@ -175,7 +187,11 @@
           2: {name: '销售', value: '23,2322', url: 'http://www.baidu.com', bgColor: 'bg-red', icon: 'ion-ios-people-outline'},
           3: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bgColor: 'bg-green', icon: 'ion-ios-cart-outline'},
           4: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bgColor: 'bg-green', icon: 'ion-ios-cart-outline'},
-          6: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bgColor: 'bg-green', icon: 'ion-ios-cart-outline', progress: '10%', description: '测试'}
+          6: {name: '毛利', value: '80%', url: 'http://www.baidu.com', bgColor: 'bg-green', icon: 'ion-ios-cart-outline', progress: '10%', description: '测试'},
+          10: {title: '百度', url: 'http://www.baidu.com', height: 600},
+          11: {title: '温氏', url: 'http://www.wens.com.cn', height: 600},
+          12: {title: '鲜品', url: 'http://xpc.wens.com.cn', height: 600},
+          13: {title: 'Hao123', url: 'http://www.hao123.com'}
         },
         generateRandomNumbers (numbers, max, min) {
           var a = []
