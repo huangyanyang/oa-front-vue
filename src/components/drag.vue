@@ -11,7 +11,8 @@
   .flip-list-leave-to {
 
   }
-  .modal{
+
+  .modal {
     background-color: white;
   }
 
@@ -22,35 +23,55 @@
     margin: 0 auto;
     padding: 0;
   }
+
+  .ivu-affix {
+    z-index: -10
+  }
 </style>
 <template>
-  <Row>
-    <draggable v-model="appList" :options="dragOption"
-               @choose="onChoose" @end="onEnd" :move="onMove" @sort="onSort">
-      <transition-group type="transition" :name="'flip-list'" @leave="leave" tag="div">
-        <Col span="4" v-for="app in appList" :key="app.id" :class="[app.isCategory ? noDragClass : dragClass]"
-             class="col">
-        <template v-if="!app.isCategory">
-          <app-launcher :name="app.name" :icon="app.icon" :msgCount="app.msgCount"></app-launcher>
-        </template>
-        <template v-else>
-          <category :name="app.name" :msgCount="app.msgCount" :apps="app.apps" ref="category"
-                    @appInCategoryRemove="appInCategoryRemove"></category>
-        </template>
-        </Col>
-      </transition-group>
-    </draggable>
-    <Col span="4" class="col">
-    <Tooltip content="新增文件夹">
-      <Button class="plus" @click="showModal">
-        <Icon type="ios-plus-empty" size="100"></Icon>
-      </Button>
-    </Tooltip>
-    <Modal v-model="plusCategory" title="请输入你要增加的文件夹的名称" @on-ok="addCategory">
-      <Input placeholder="请输入你要增加的文件夹的名称" v-model="categoryName"></Input>
-    </Modal>
-    </Col>
-  </Row>
+  <div>
+    <Affix :offset-top="100" style="z-index: 10;top: 50px;position: relative">
+      <Tooltip content="设置app是否可以拖拽进文件夹" placement="top">
+        <i-switch size="large" style="transform: rotate(90deg)" @on-change="switchChange">
+          <span slot="open">
+            <div style="float: left;transform: rotate(-90deg);margin-right:2px;font-size: 13px">开</div>
+            <div style="float: left;transform: rotate(-90deg);margin-right:2px;font-size: 13px">启</div>
+          </span>
+          <span slot="close">
+            <div style="float: left;transform: rotate(-90deg);margin-right:2px;font-size: 13px">关</div>
+            <div style="float: left;transform: rotate(-90deg);margin-right:2px;font-size: 13px">闭</div>
+          </span>
+        </i-switch>
+      </Tooltip>
+    </Affix>
+    <Row>
+      <draggable v-model="appList" :options="dragOption" @choose="onChoose" @end="onEnd" :move="onMove" @sort="onSort"
+                 @start="onStart">
+        <transition-group type="transition" :name="'flip-list'" @leave="leave" tag="div">
+          <Col span="4" v-for="app in appList" :key="app.id" :class="[app.isCategory ? noDragClass : dragClass]"
+               class="col">
+          <template v-if="!app.isCategory">
+            <app-launcher :name="app.name" :icon="app.icon" :msgCount="app.msgCount" :url="app.url"></app-launcher>
+          </template>
+          <template v-else>
+            <category :name="app.name" :msgCount="app.msgCount" :apps="app.apps" ref="category"
+                      @appInCategoryRemove="appInCategoryRemove"></category>
+          </template>
+          </Col>
+        </transition-group>
+      </draggable>
+      <Col span="4" class="col">
+      <Tooltip content="新增文件夹">
+        <Button class="plus" @click="showModal">
+          <Icon type="ios-plus-empty" size="100"></Icon>
+        </Button>
+      </Tooltip>
+      <Modal v-model="plusCategory" title="请输入你要增加的文件夹的名称" @on-ok="addCategory">
+        <Input placeholder="请输入你要增加的文件夹的名称" v-model="categoryName"></Input>
+      </Modal>
+      </Col>
+    </Row>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -90,26 +111,23 @@
         endTime: 0,
         isMove: false,
         itemIndex: 0,
-        dragOption: {
-          animation: 0,
-          group: 'description',
-          ghostClass: 'ghost',
-          draggable: '.drag'
-        },
-        categoryIndex: 0
+        categoryIndex: 0,
+        canDragInCategory: false,
+        dragDisabled: true
       }
     },
     mounted () {
-      let categorys = JQuery('.noDrag')
-      for (let i = 0; i < categorys.length; i++) {
-        JQuery(categorys[i]).on('mouseenter', function () {
-          JQuery('.noDrag').addClass('drag')
-        })
-        JQuery(categorys[i]).on('mouseleave', function () {
-          JQuery('.noDrag').removeClass('drag')
-        })
-      }
-      JQuery('.plus').parent().removeClass('noDrag')
+      JQuery('.noDrag').addClass('drag')
+//      let categorys = JQuery('.noDrag')
+//      for (let i = 0; i < categorys.length; i++) {
+//        JQuery(categorys[i]).on('mouseenter', function () {
+//          JQuery('.noDrag').addClass('drag')
+//        })
+//        JQuery(categorys[i]).on('mouseleave', function () {
+//          JQuery('.noDrag').removeClass('drag')
+//        })
+//      }
+//      JQuery('.plus').parent().removeClass('noDrag')
 //      JQuery('.plus').on('click', function () {
 //        console.log(this.plusCategory)
 //        this.plusCategory = true
@@ -117,16 +135,16 @@
 //      })
     },
     updated () {
-      let categorys = JQuery('.noDrag')
-      for (let i = 0; i < categorys.length; i++) {
-        JQuery(categorys[i]).on('mouseenter', function () {
-          JQuery('.noDrag').addClass('drag')
-        })
-        JQuery(categorys[i]).on('mouseleave', function () {
-          JQuery('.noDrag').removeClass('drag')
-        })
-      }
-      JQuery('.plus').parent().removeClass('noDrag')
+//      let categorys = JQuery('.noDrag')
+//      for (let i = 0; i < categorys.length; i++) {
+//        JQuery(categorys[i]).on('mouseenter', function () {
+//          JQuery('.noDrag').addClass('drag')
+//        })
+//        JQuery(categorys[i]).on('mouseleave', function () {
+//          JQuery('.noDrag').removeClass('drag')
+//        })
+//      }
+//      JQuery('.plus').parent().removeClass('noDrag')
 //      JQuery('.plus').on('click', function () {
 //        console.log(this.plusCategory)
 //        this.plusCategory = true
@@ -135,6 +153,26 @@
     },
     props: ['appList'],
     methods: {
+      switchChange (status) {
+        if (status) {
+          this.$Message.success({
+            content: '现在可以将APP拖进文件夹了，但是APP之间不可以拖拽了哦',
+            duration: 2.5
+          })
+          JQuery('.noDrag').removeClass('drag')
+          this.dragDisabled = false
+          this.canDragInCategory = true
+        } else {
+          this.$Message.success(
+            {
+              content: '现在APP之间可以拖拽了，但是不可以将APP拖进文件夹了哦',
+              duration: 2.5
+            })
+          JQuery('.noDrag').addClass('drag')
+          this.canDragInCategory = false
+          this.dragDisabled = true
+        }
+      },
       showModal () {
         this.plusCategory = true
       },
@@ -192,13 +230,20 @@
         console.log('canDragInDiv')
       },
       onChoose (evt, originalEvent) {
+        console.log('choose')
 //        this.sortable = false
-//        let mousePosition = this.getMousePosition(originalEvent)
-//        console.log('mousePosition', mousePosition)
+      },
+      onStart () {
+        console.log('start')
+//        var self = this
+//        document.onmousemove = function () {
+//          let mousePosition = self.getMousePosition(originalEvent)
+//          console.log('mousePosition', mousePosition)
+//        }
       },
       onMove (e) {
         console.log('this.isMove before', this.isMove)
-        this.isMove = true
+//        this.isMove = true
         console.log('this.isMove after', this.isMove)
 //        let mousePosition = this.getMousePosition(e)
 //        console.log('move' + this.i)
@@ -229,82 +274,89 @@
 //        })
       },
       onSort (e) {
-//        this.isMove = true
+        this.isMove = true
 //        console.log(e)
 //        this.itemIndex = e.newIndex
 //        console.log(e)
         console.log('sort')
       },
       onEnd (e) {
-        console.log('end')
-        let mousePosition = this.getMousePosition()
-        let isMouseInCol = this.isMouseInDiv('.noDrag', mousePosition)
-        if (isMouseInCol.isMouseInDiv) {
-          let index
-          if (e.oldIndex === e.newIndex) {
-            index = e.oldIndex
-          } else {
-            index = e.newIndex
-          }
-          console.log(e.oldIndex, e.newIndex)
-          let appList = this.appList
-          let appListWithoutCategory = appList.slice(0)
-          let count = 0
-          for (let i = 0; i < appList.length; i++) {
-            if (appList[i].isCategory) {
-              appListWithoutCategory.splice(i - count, 1)
-              count++
+        console.log(this.canDragInCategory)
+        if (this.canDragInCategory) {
+          this.isMove = true
+          console.log('end')
+          let mousePosition = this.getMousePosition()
+          let isMouseInCol = this.isMouseInDiv('.noDrag', mousePosition)
+          if (isMouseInCol.isMouseInDiv) {
+            let index
+            if (e.oldIndex === e.newIndex) {
+              index = e.oldIndex
+            } else {
+              index = e.newIndex
             }
-          }
-          console.log('index', index)
-          console.log('appListWithoutCategory', appListWithoutCategory)
-          let appIn = appListWithoutCategory[index]
-          console.log('在文件夹内')
-          console.log('appIn', appIn)
-          console.log('appList', appList)
-          let result = this.isMouseInDiv('.categoryDiv', mousePosition)
-          if (result.isMouseInDiv) {
-            this.categoryIndex = result.categoryDivIndex
-            for (let i = 0; i < appList.length; i++) {
-              if (appList[i].id === appIn.id) {
-                this.appList.splice(i, 1)
-              }
-            }
-            let count2 = 0
+            console.log(e.oldIndex, e.newIndex)
+            let appList = this.appList
+            let appListWithoutCategory = appList.slice(0)
+            let count = 0
             for (let i = 0; i < appList.length; i++) {
               if (appList[i].isCategory) {
-                if (count2 === this.categoryIndex) {
-                  console.log('this.categoryIndex', this.categoryIndex)
-                  this.appList[i].apps.push(appIn)
-                  this.isMove = false
-                  console.log(appList)
+                appListWithoutCategory.splice(i - count, 1)
+                count++
+              }
+            }
+            console.log('index', index)
+            console.log('appListWithoutCategory', appListWithoutCategory)
+            let appIn = appListWithoutCategory[index]
+            console.log('在文件夹内')
+            console.log('appIn', appIn)
+            console.log('appList', appList)
+            let result = this.isMouseInDiv('.categoryDiv', mousePosition)
+            if (result.isMouseInDiv) {
+              this.categoryIndex = result.categoryDivIndex
+              for (let i = 0; i < appList.length; i++) {
+                if (appList[i].id === appIn.id) {
+                  this.appList.splice(i, 1)
                 }
-                count2++
               }
-            }
-          } else {
-            let count3 = 0
-            for (let i = 0; i < appList.length; i++) {
-              if (appList[i].isCategory) {
-                if (count3 === isMouseInCol.categoryDivIndex) {
-                  let categoryX = JQuery(JQuery('.categoryDiv')[isMouseInCol.categoryDivIndex]).offset().left
-                  if (mousePosition.x < categoryX) {
-                    console.log('在文件夹左边')
-                    for (let y = 0; y < appList.length; y++) {
-                      if (appList[y].id === appIn.id) {
-                        if (y < i) {
-                          this.appList.splice(i, 0, appIn)
-                          this.appList.splice(y, 1)
-                        } else {
-                          this.appList.splice(y, 1)
-                          this.appList.splice(i, 0, appIn)
-                        }
-                      }
-                    }
-                  } else {
-                    console.log('在文件夹右边')
-                    for (let y = 0; y < appList.length; y++) {
-                      if (appList[y].id === appIn.id) {
+              let count2 = 0
+              for (let i = 0; i < appList.length; i++) {
+                if (appList[i].isCategory) {
+                  if (count2 === this.categoryIndex) {
+                    console.log('this.categoryIndex', this.categoryIndex)
+                    this.appList[i].apps.push(appIn)
+                    this.isMove = false
+                    console.log(appList)
+                  }
+                  count2++
+                }
+              }
+            } else {
+              this.$Message.info({
+                content: '鼠标要在文件夹里面才拖得进去哦,再试一次吧(*^__^*)',
+                duration: 3
+              })
+//              let count3 = 0
+//              for (let i = 0; i < appList.length; i++) {
+//                if (appList[i].isCategory) {
+//                  if (count3 === isMouseInCol.categoryDivIndex) {
+//                    let categoryX = JQuery(JQuery('.categoryDiv')[isMouseInCol.categoryDivIndex]).offset().left
+//                    if (mousePosition.x < categoryX) {
+//                      console.log('在文件夹左边')
+//                      for (let y = 0; y < appList.length; y++) {
+//                        if (appList[y].id === appIn.id) {
+//                          if (y < i) {
+//                            this.appList.splice(i, 0, appIn)
+//                            this.appList.splice(y, 1)
+//                          } else {
+//                            this.appList.splice(y, 1)
+//                            this.appList.splice(i, 0, appIn)
+//                          }
+//                        }
+//                      }
+//                    } else {
+//                      console.log('在文件夹右边')
+//                      for (let y = 0; y < appList.length; y++) {
+//                        if (appList[y].id === appIn.id) {
 //                        if (y < i) {
 //                          this.appList.splice(i + 1, 0, appIn)
 //                          this.appList.splice(y, 1)
@@ -312,20 +364,24 @@
 //                          this.appList.splice(y, 1)
 //                          this.appList.splice(i + 1, 0, appIn)
 //                        }
-                      }
-                    }
-                  }
-                }
-                count3++
-              }
+//                        }
+//                      }
+//                    }
+//                  }
+//                  count3++
+//                }
+//              }
             }
+          } else {
+            this.$Message.info({
+              content: '鼠标要在文件夹里面才拖得进去哦,再试一次吧(*^__^*)',
+              duration: 3
+            })
           }
-        } else {
-          console.log('在col外')
-        }
-        this.isMove = false
+          this.isMove = false
 
-        this.i = 1
+          this.i = 1
+        }
       },
       getMousePosition (ev) {
         ev = ev || window.event
@@ -406,8 +462,14 @@
       }
     },
     computed: {
-      listString () {
-        return JSON.stringify(this.appList, null, 2)
+      dragOption () {
+        return {
+          animation: 0,
+          group: 'description',
+          ghostClass: 'ghost',
+          draggable: '.drag',
+          sort: this.dragDisabled
+        }
       }
     },
     watch: {

@@ -12,7 +12,8 @@
     display: block;
     margin-top: 5px;
   }
-  body{
+
+  body {
     padding: 50px;
   }
 </style>

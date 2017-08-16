@@ -1,14 +1,15 @@
 <style>
-  .app-launcher{
+  .app-launcher {
     text-align: center;
   }
-  .name{
+
+  .name {
     display: block;
     margin-top: 5px;
   }
 </style>
 <template>
-  <div class="app-launcher">
+  <div class="app-launcher" @click="dbclick">
     <badge :count="msgCount">
       <icon :type="icon" size="100"></icon>
     </badge>
@@ -22,9 +23,15 @@
 
   export default {
     name: 'appLauncher',
-    props: ['name', 'icon', 'msgCount'],
+    props: ['name', 'icon', 'msgCount', 'url'],
     components: {
       iview
+    },
+    methods: {
+      dbclick (e) {
+        console.log(e)
+        location.href = this.url
+      }
     }
   }
 </script>
