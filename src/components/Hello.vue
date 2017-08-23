@@ -5,7 +5,7 @@
   }
 
   .modal {
-    padding: 80px;
+    padding: 10%;
   }
 
 </style>
@@ -25,47 +25,63 @@
       return {
         appList: [
           {
-            name: '微信',
+            name: '来文来电',
             id: 0,
-            icon: 'ios-bell-outline',
+            icon: '/static/img/logo/lwld.jpg',
             msgCount: 99,
             isCategory: false,
             apps: [],
             url: 'http://weixin.qq.com/'
           },
-          {name: 'QQ', id: 1, icon: 'xbox', msgCount: 10, isCategory: false, apps: [], url: 'http://www.qq.com'},
-          {name: '淘宝', id: 2, icon: 'headphone', msgCount: 9, isCategory: false, apps: [], url: 'http://www.taobao.com'},
           {
-            name: '陌陌',
+            name: '任务管理',
+            id: 1,
+            icon: '/static/img/logo/任务管理.jpg',
+            msgCount: 10,
+            isCategory: false,
+            apps: [],
+            url: 'http://www.qq.com'
+          },
+          {
+            name: '约稿系统',
+            id: 2,
+            icon: '/static/img/logo/yuegaoxitong.jpg',
+            msgCount: 9,
+            isCategory: false,
+            apps: [],
+            url: 'http://www.taobao.com'
+          },
+          {
+            name: '项目考核',
             id: 3,
-            icon: 'social-chrome',
+            icon: '/static/img/logo/项目考核.jpg',
             msgCount: 8,
             isCategory: false,
             apps: [],
             url: 'http://https://www.immomo.com/'
           },
           {
-            name: '58同城',
+            name: '温氏互助',
             id: 4,
-            icon: 'social-octocat',
+            icon: '/static/img/logo/wenshihuzhu.jpg',
             msgCount: 1,
             isCategory: false,
             apps: [],
             url: 'http://www.58.com/'
           },
           {
-            name: '京东',
+            name: '设备运维',
             id: 9,
-            icon: 'ios-flower',
+            icon: '/static/img/logo/shebeiyunwei.svg',
             msgCount: 9,
             isCategory: false,
             apps: [],
             url: 'http://www.jd.com'
           },
           {
-            name: '唯品会',
+            name: '投资理财',
             id: 10,
-            icon: 'ios-flame',
+            icon: '/static/img/logo/投资理财.jpg',
             msgCount: 11,
             isCategory: false,
             apps: [],
@@ -81,7 +97,7 @@
               {
                 name: '携程',
                 id: 12,
-                icon: 'social-github',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
@@ -90,7 +106,7 @@
               {
                 name: '去哪儿',
                 id: 13,
-                icon: 'social-twitter',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
@@ -99,13 +115,21 @@
               {
                 name: '支付宝',
                 id: 14,
-                icon: 'social-linkedin-outline',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
                 url: 'http://www.alipay.com'
               },
-              {name: '天猫', id: 19, icon: 'disc', msgCount: 9, isCategory: false, apps: [], url: 'http://www.baidu.com'}
+              {
+                name: '天猫',
+                id: 19,
+                icon: '/static/img/logo/lwld.jpg',
+                msgCount: 9,
+                isCategory: false,
+                apps: [],
+                url: 'http://www.baidu.com'
+              }
             ]
           },
           {
@@ -118,7 +142,7 @@
               {
                 name: '携程',
                 id: 5,
-                icon: 'android-globe',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
@@ -127,7 +151,7 @@
               {
                 name: '去哪儿',
                 id: 6,
-                icon: 'android-subway',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
@@ -136,7 +160,7 @@
               {
                 name: '支付宝',
                 id: 7,
-                icon: 'android-bicycle',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
@@ -145,7 +169,7 @@
               {
                 name: '天猫',
                 id: 8,
-                icon: 'android-upload',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
@@ -163,7 +187,7 @@
               {
                 name: '携程',
                 id: 15,
-                icon: 'android-camera',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
@@ -172,7 +196,7 @@
               {
                 name: '去哪儿',
                 id: 16,
-                icon: 'android-image',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
@@ -181,110 +205,118 @@
               {
                 name: '支付宝',
                 id: 17,
-                icon: 'android-print',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
-                url: 'http://www.baidu.com'
+                url: '/static/img/logo/lwld.jpg'
               },
               {
                 name: '天猫',
                 id: 18,
-                icon: 'social-instagram',
+                icon: '/static/img/logo/lwld.jpg',
                 msgCount: 9,
                 isCategory: false,
                 apps: [],
-                url: 'http://www.baidu.com'
+                url: '/static/img/logo/lwld.jpg'
               }
             ]
           },
           {
-            name: '微信',
+            name: '工程管理',
             id: 19,
-            icon: 'ios-bell-outline',
+            icon: '/static/img/logo/工程管理.jpg',
             msgCount: 99,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
-          {name: 'QQ', id: 20, icon: 'xbox', msgCount: 10, isCategory: false, apps: [], url: 'http://www.baidu.com'},
+          {name: '温氏生鲜', id: 20, icon: '/static/img/logo/wenshishengxian.jpg', msgCount: 10, isCategory: false, apps: [], url: 'http://www.baidu.com'},
           {
-            name: '淘宝',
+            name: '温氏生鲜',
             id: 21,
-            icon: 'headphone',
+            icon: '/static/img/logo/wenshishengxian.jpg',
             msgCount: 9,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
           {
-            name: '陌陌',
+            name: '智能门禁',
             id: 22,
-            icon: 'social-chrome',
+            icon: '/static/img/logo/zhinengmenjin.jpg',
             msgCount: 8,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
           {
-            name: '58同城',
+            name: '公众号管理',
             id: 23,
-            icon: 'social-octocat',
+            icon: '/static/img/logo/公众号管理.jpg',
             msgCount: 1,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
           {
-            name: '京东',
+            name: '码头散粮',
             id: 24,
-            icon: 'ios-flower',
+            icon: '/static/img/logo/码头散粮.jpg',
             msgCount: 9,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
           {
-            name: '唯品会',
+            name: '物流运输',
             id: 25,
-            icon: 'ios-flame',
+            icon: '/static/img/logo/物流运输.jpg',
             msgCount: 11,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
           {
-            name: '微信',
+            name: '合同管理',
             id: 26,
-            icon: 'ios-bell-outline',
+            icon: '/static/img/logo/合同管理.jpg',
             msgCount: 99,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
-          {name: 'QQ', id: 27, icon: 'xbox', msgCount: 10, isCategory: false, apps: [], url: 'http://www.baidu.com'},
           {
-            name: '淘宝',
+            name: '展馆预订',
+            id: 27,
+            icon: '/static/img/logo/展馆预订.jpg',
+            msgCount: 10,
+            isCategory: false,
+            apps: [],
+            url: 'http://www.baidu.com'
+          },
+          {
+            name: '内部商城',
             id: 28,
-            icon: 'headphone',
+            icon: '/static/img/logo/内部商城.jpg',
             msgCount: 9,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
           {
-            name: '陌陌',
+            name: '培训管理',
             id: 29,
-            icon: 'social-chrome',
+            icon: '/static/img/logo/培训管理.jpg',
             msgCount: 8,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           },
           {
-            name: '58同城',
+            name: '顺风车',
             id: 30,
-            icon: 'social-octocat',
+            icon: '/static/img/logo/顺风车.jpg',
             msgCount: 1,
             isCategory: false,
             apps: [],
@@ -293,7 +325,7 @@
           {
             name: '京东',
             id: 31,
-            icon: 'ios-flower',
+            icon: '/static/img/logo/lwld.jpg',
             msgCount: 9,
             isCategory: false,
             apps: [],
@@ -302,7 +334,7 @@
           {
             name: '唯品会',
             id: 32,
-            icon: 'ios-flame',
+            icon: '/static/img/logo/lwld.jpg',
             msgCount: 11,
             isCategory: false,
             apps: [],

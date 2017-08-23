@@ -23,14 +23,10 @@
     margin: 0 auto;
     padding: 0;
   }
-
-  .ivu-affix {
-    z-index: -10
-  }
 </style>
 <template>
   <div>
-    <Affix :offset-top="100" style="z-index: 10;top: 50px;position: relative">
+    <Affix :offset-top="80" style="z-index: 10;top: 50px;position: relative">
       <Tooltip content="设置app是否可以拖拽进文件夹" placement="top">
         <i-switch size="large" style="transform: rotate(90deg)" @on-change="switchChange">
           <span slot="open">
@@ -48,7 +44,7 @@
       <draggable v-model="appList" :options="dragOption" @choose="onChoose" @end="onEnd" :move="onMove" @sort="onSort"
                  @start="onStart">
         <transition-group type="transition" :name="'flip-list'" @leave="leave" tag="div">
-          <Col span="4" v-for="app in appList" :key="app.id" :class="[app.isCategory ? noDragClass : dragClass]"
+          <Col :lg="4" :md="6" :sm="8" :xs="12" v-for="app in appList" :key="app.id" :class="[app.isCategory ? noDragClass : dragClass]"
                class="col">
           <template v-if="!app.isCategory">
             <app-launcher :name="app.name" :icon="app.icon" :msgCount="app.msgCount" :url="app.url"></app-launcher>
@@ -60,7 +56,7 @@
           </Col>
         </transition-group>
       </draggable>
-      <Col span="4" class="col">
+      <Col :lg="4" :md="6" :sm="8" :xs="12" class="col">
       <Tooltip content="新增文件夹">
         <Button class="plus" @click="showModal">
           <Icon type="ios-plus-empty" size="100"></Icon>

@@ -10,11 +10,17 @@
 
   .name {
     display: block;
-    margin-top: 5px;
+    margin-top: 15px;
+    font-size: 20px;
   }
 
   body {
     padding: 50px;
+  }
+  .appSmallImg{
+    width: 25px;
+    height: 25px;
+    margin: 2px;
   }
 </style>
 <template>
@@ -24,7 +30,7 @@
         <row>
           <transition-group @enter="enter" @beforeEnter="beforeEnter">
             <Col span="8" v-for="app in appsInCategory" :key="app.id" v-model="apps">
-            <icon :type="app.icon" size="25"></icon>
+            <img :src="app.icon" class="appSmallImg"/>
             </Col>
           </transition-group>
         </row>

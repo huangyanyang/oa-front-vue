@@ -8,7 +8,7 @@
     <draggable v-model="list" :options="dragOptions" :move="onMove"
                @start="" @end="end">
       <transition-group type="transition" :name="'category-list'" @leave="leave">
-        <Col span="4" v-for="app in list" :key="app.id" class="col">
+        <Col :lg="4" :md="6" :sm="8" :xs="12" v-for="app in list" :key="app.id" class="col">
         <app-launcher :name="app.name" :icon="app.icon" :msgCount="app.msgCount" :url="app.url"></app-launcher>
         </Col>
       </transition-group>
