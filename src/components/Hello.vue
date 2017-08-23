@@ -16,14 +16,20 @@
 </template>
 <script>
   import Drag from './drag.vue'
+  import Iview from 'iview'
 
   export default {
     components: {
-      Drag
+      Drag,
+      Iview
     },
     data () {
-      return {
-        appList: [
+//      localStorage.clear()
+      let appList
+      if (localStorage.getItem('appList')) {
+        appList = JSON.parse(localStorage.getItem('appList'))
+      } else {
+        appList = [
           {
             name: '来文来电',
             id: 0,
@@ -231,7 +237,15 @@
             apps: [],
             url: 'http://www.baidu.com'
           },
-          {name: '温氏生鲜', id: 20, icon: '/static/img/logo/wenshishengxian.jpg', msgCount: 10, isCategory: false, apps: [], url: 'http://www.baidu.com'},
+          {
+            name: '温氏生鲜',
+            id: 20,
+            icon: '/static/img/logo/wenshishengxian.jpg',
+            msgCount: 10,
+            isCategory: false,
+            apps: [],
+            url: 'http://www.baidu.com'
+          },
           {
             name: '温氏生鲜',
             id: 21,
@@ -332,18 +346,27 @@
             url: 'http://www.baidu.com'
           },
           {
-            name: '唯品会',
+            name: '药品知识',
             id: 32,
-            icon: '/static/img/logo/lwld.jpg',
+            icon: '/static/img/logo/药品知识.jpg',
             msgCount: 11,
             isCategory: false,
             apps: [],
             url: 'http://www.baidu.com'
           }
-        ],
+        ]
+      }
+      return {
+        appList: appList,
         isDragging: false,
         delayedDragging: false
       }
+    },
+    mounted () {
+      this.$Message.info({
+        content: '进行拖拽的时候如果发现不能拖拽而是进行选中的时候可以试试通过拖拽图标右上角的消息哦',
+        duration: 5
+      })
     }
   }
 

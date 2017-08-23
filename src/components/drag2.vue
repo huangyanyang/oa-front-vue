@@ -46,6 +46,7 @@
       end (ev) {
         var that = this
         JQuery('body').one('mouseup', function (e) {
+          console.log('mouseup')
           let mousePosition = {x: e.pageX, y: e.pageY}
           if (!that.isMouseInDiv('.ivu-modal', mousePosition)) {
             console.log('在模态框外')

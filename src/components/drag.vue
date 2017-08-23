@@ -44,14 +44,15 @@
       <draggable v-model="appList" :options="dragOption" @choose="onChoose" @end="onEnd" :move="onMove" @sort="onSort"
                  @start="onStart">
         <transition-group type="transition" :name="'flip-list'" @leave="leave" tag="div">
-          <Col :lg="4" :md="6" :sm="8" :xs="12" v-for="app in appList" :key="app.id" :class="[app.isCategory ? noDragClass : dragClass]"
+          <Col :lg="4" :md="6" :sm="8" :xs="12" v-for="app in appList" :key="app.id"
+               :class="[app.isCategory ? noDragClass : dragClass]"
                class="col">
           <template v-if="!app.isCategory">
             <app-launcher :name="app.name" :icon="app.icon" :msgCount="app.msgCount" :url="app.url"></app-launcher>
           </template>
           <template v-else>
             <category :name="app.name" :msgCount="app.msgCount" :apps="app.apps" ref="category"
-                      @appInCategoryRemove="appInCategoryRemove"></category>
+                      @appInCategoryRemove="appInCategoryRemove" @categoryNameChange="categoryNameChange"></category>
           </template>
           </Col>
         </transition-group>
@@ -65,6 +66,13 @@
       <Modal v-model="plusCategory" title="请输入你要增加的文件夹的名称" @on-ok="addCategory">
         <Input placeholder="请输入你要增加的文件夹的名称" v-model="categoryName"></Input>
       </Modal>
+      </Col>
+      <Col :lg="4" :md="6" :sm="8" :xs="12" class="col">
+      <Tooltip content="恢复到默认情况">
+        <Button class="plus" @click="restoreDefault">
+          <Icon type="ios-loop-strong" size="100"></Icon>
+        </Button>
+      </Tooltip>
       </Col>
     </Row>
   </div>
@@ -113,7 +121,6 @@
       }
     },
     mounted () {
-      JQuery('.noDrag').addClass('drag')
 //      let categorys = JQuery('.noDrag')
 //      for (let i = 0; i < categorys.length; i++) {
 //        JQuery(categorys[i]).on('mouseenter', function () {
@@ -131,24 +138,17 @@
 //      })
     },
     updated () {
-//      let categorys = JQuery('.noDrag')
-//      for (let i = 0; i < categorys.length; i++) {
-//        JQuery(categorys[i]).on('mouseenter', function () {
-//          JQuery('.noDrag').addClass('drag')
-//        })
-//        JQuery(categorys[i]).on('mouseleave', function () {
-//          JQuery('.noDrag').removeClass('drag')
-//        })
-//      }
-//      JQuery('.plus').parent().removeClass('noDrag')
-//      JQuery('.plus').on('click', function () {
-//        console.log(this.plusCategory)
-//        this.plusCategory = true
-//        alert('7777')
-//      })
+      console.log('updated')
     },
     props: ['appList'],
     methods: {
+      categoryNameChange () {
+        localStorage.setItem('appList', JSON.stringify(this.appList))
+      },
+      restoreDefault () {
+        localStorage.clear()
+        window.location.reload()
+      },
       switchChange (status) {
         if (status) {
           this.$Message.success({
@@ -182,9 +182,11 @@
           apps: []
         })
         this.categoryName = ''
+        localStorage.setItem('appList', JSON.stringify(this.appList))
       },
       appInCategoryRemove (appOut) {
         this.appList.push(appOut)
+        localStorage.setItem('appList', JSON.stringify(this.appList))
       },
       leave: function (el, done) {
         console.log(el)
@@ -274,7 +276,8 @@
 //        console.log(e)
 //        this.itemIndex = e.newIndex
 //        console.log(e)
-        console.log('sort')
+        console.log('save appList')
+        localStorage.setItem('appList', JSON.stringify(this.appList))
       },
       onEnd (e) {
         console.log(this.canDragInCategory)
@@ -321,6 +324,7 @@
                     console.log('this.categoryIndex', this.categoryIndex)
                     this.appList[i].apps.push(appIn)
                     this.isMove = false
+                    localStorage.setItem('appList', JSON.stringify(this.appList))
                     console.log(appList)
                   }
                   count2++
@@ -475,6 +479,9 @@
         } else {
           JQuery('.noDrag').removeClass('drag')
         }
+      },
+      appList () {
+        localStorage.setItem('appList', JSON.stringify(this.appList))
       }
     }
   }

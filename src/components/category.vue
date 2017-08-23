@@ -17,10 +17,19 @@
   body {
     padding: 50px;
   }
-  .appSmallImg{
+
+  .appSmallImg {
     width: 25px;
     height: 25px;
     margin: 2px;
+  }
+
+  .nameInput {
+    margin-top: 15px;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
   }
 </style>
 <template>
@@ -29,7 +38,7 @@
       <div class="categoryDiv" @click="showCategory = true">
         <row>
           <transition-group @enter="enter" @beforeEnter="beforeEnter">
-            <Col span="8" v-for="app in appsInCategory" :key="app.id" v-model="apps">
+            <Col span="8" v-for="app in appsInCategory" :key="app.id" v-model="dataApps">
             <img :src="app.icon" class="appSmallImg"/>
             </Col>
           </transition-group>
@@ -42,13 +51,15 @@
       </Modal>
     </badge>
     <br>
-    <span class="name">{{name}}</span>
+    <Tooltip content="点击更改文件夹名字" v-if="isNotChangeName">
+      <span class="name" @click="changeName">{{dataName}}</span>
+    </Tooltip>
+    <input v-model="dataName" v-else class="nameInput" @mouseleave="mouseleave">
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import iView from 'iview'
-  import draggable from 'vuedraggable'
   import Drag from './drag.vue'
   import Drag2 from './drag2.vue'
   import Velocity from 'velocity-animate'
@@ -58,17 +69,27 @@
     components: {
       Drag2,
       Drag,
-      iView,
-      draggable
+      iView
     },
     data () {
       return {
+        dataApps: this.apps,
+        dataName: this.name,
+        dataMsgCount: this.msgCount,
         showCategory: false,
-        appsInCategory: this.apps
+        appsInCategory: this.apps,
+        isNotChangeName: true
       }
     },
     props: ['apps', 'name', 'msgCount'],
     methods: {
+      mouseleave () {
+        console.info('name', this.dataName)
+        this.isNotChangeName = true
+      },
+      changeName () {
+        this.isNotChangeName = false
+      },
       beforeEnter (el, done) {
         el.style.opacity = 0
       },
@@ -93,6 +114,11 @@
           realMsgCount += this.apps[i].msgCount
         }
         return realMsgCount
+      }
+    },
+    watch: {
+      dataName () {
+        this.$emit('categoryNameChange')
       }
     }
   }

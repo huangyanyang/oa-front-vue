@@ -33,7 +33,8 @@
     data () {
       return {
 //        imgSrc: 'http://img.taopic.com/uploads/allimg/140313/235026-1403130Z43831.jpg'
-        imgSrc: '/static/img/logo/lwld.jpg'
+        imgSrc: '/static/img/logo/lwld.jpg',
+        isRediract: false
       }
     },
     props: ['name', 'icon', 'msgCount', 'url'],
@@ -42,8 +43,33 @@
     },
     methods: {
       dbclick (e) {
-        console.log(e)
-        location.href = this.url
+        let willConfirm = true
+        if (willConfirm) {
+          this.$Modal.confirm({
+            content: '你确定要跳转到' + this.url + '吗',
+            okText: '好的',
+            cancelText: '我不小心点到了',
+            onOk: () => {
+              location.href = this.url
+//              this.$Modal.confirm({
+//                content: '那你希望下次点击app的时候还会出现这个提示吗',
+//                okText: '要滴',
+//                cancelText: '不再提示',
+//                onOk: () => {
+//                  location.href = this.url
+//                },
+//                onCancel: () => {
+//                  willConfirm = false
+//                }
+//              })
+            },
+            onCancel: () => {
+              return
+            }
+          })
+        } else {
+          return
+        }
       }
     }
   }
