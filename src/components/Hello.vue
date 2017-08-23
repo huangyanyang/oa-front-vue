@@ -323,9 +323,9 @@
             url: 'http://www.baidu.com'
           },
           {
-            name: '京东',
+            name: '在线客服',
             id: 31,
-            icon: '/static/img/logo/lwld.jpg',
+            icon: '/static/img/logo/在线客服.jpg',
             msgCount: 9,
             isCategory: false,
             apps: [],
