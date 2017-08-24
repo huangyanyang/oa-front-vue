@@ -8,12 +8,6 @@
     overflow: scroll;
   }
 
-  .name {
-    display: block;
-    margin-top: 15px;
-    font-size: 20px;
-  }
-
   body {
     padding: 50px;
   }
@@ -24,11 +18,9 @@
     margin: 2px;
   }
 
-  .nameInput {
+  .name {
+    display: block;
     margin-top: 15px;
-    text-align: center;
-    width: 100px;
-    height: 30px;
     font-size: 20px;
   }
 </style>
@@ -54,7 +46,7 @@
     <Tooltip content="点击更改文件夹名字" v-if="isNotChangeName">
       <span class="name" @click="changeName">{{dataName}}</span>
     </Tooltip>
-    <input v-model="dataName" v-else class="nameInput" @mouseleave="mouseleave">
+    <focusInput v-else v-model="dataName" @mouseleave.native="mouseleave"></focusInput>
   </div>
 </template>
 
@@ -62,6 +54,7 @@
   import iView from 'iview'
   import Drag from './drag.vue'
   import Drag2 from './drag2.vue'
+  import focusInput from './input.vue'
   import Velocity from 'velocity-animate'
 
   export default {
@@ -69,25 +62,33 @@
     components: {
       Drag2,
       Drag,
-      iView
+      iView,
+      focusInput
     },
     data () {
       return {
         dataApps: this.apps,
         dataName: this.name,
         dataMsgCount: this.msgCount,
+        dataId: this.id,
         showCategory: false,
         appsInCategory: this.apps,
         isNotChangeName: true
       }
     },
-    props: ['apps', 'name', 'msgCount'],
+    props: ['apps', 'name', 'msgCount', 'id'],
     methods: {
       mouseleave () {
-        console.info('name', this.dataName)
-        this.isNotChangeName = true
+        console.log('this.dataName', this.dataName)
+        if (this.dataName !== '') {
+          this.$emit('categoryNameChange', {id: this.dataId, name: this.dataName})
+          this.isNotChangeName = true
+        } else {
+          this.$Message.error('文件名不能为空')
+          this.isNotChangeName = false
+        }
       },
-      changeName () {
+      changeName (e) {
         this.isNotChangeName = false
       },
       beforeEnter (el, done) {
@@ -114,11 +115,9 @@
           realMsgCount += this.apps[i].msgCount
         }
         return realMsgCount
-      }
-    },
-    watch: {
-      dataName () {
-        this.$emit('categoryNameChange')
+      },
+      inputId () {
+        return 'input' + this.dataId
       }
     }
   }

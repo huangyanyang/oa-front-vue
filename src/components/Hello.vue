@@ -247,9 +247,9 @@
             url: 'http://www.baidu.com'
           },
           {
-            name: '温氏生鲜',
+            name: '会务管理',
             id: 21,
-            icon: '/static/img/logo/wenshishengxian.jpg',
+            icon: '/static/img/logo/会务管理.svg',
             msgCount: 9,
             isCategory: false,
             apps: [],
@@ -349,6 +349,33 @@
             name: '药品知识',
             id: 32,
             icon: '/static/img/logo/药品知识.jpg',
+            msgCount: 11,
+            isCategory: false,
+            apps: [],
+            url: 'http://www.baidu.com'
+          },
+          {
+            name: '抽奖系统',
+            id: 566,
+            icon: '/static/img/logo/抽奖系统.jpg',
+            msgCount: 11,
+            isCategory: false,
+            apps: [],
+            url: 'http://www.baidu.com'
+          },
+          {
+            name: '计件计酬',
+            id: 545,
+            icon: '/static/img/logo/计件计酬.jpg',
+            msgCount: 11,
+            isCategory: false,
+            apps: [],
+            url: 'http://www.baidu.com'
+          },
+          {
+            name: '生鲜大屏',
+            id: 545,
+            icon: '/static/img/logo/生鲜大屏.jpg',
             msgCount: 11,
             isCategory: false,
             apps: [],

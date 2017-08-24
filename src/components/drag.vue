@@ -51,7 +51,7 @@
             <app-launcher :name="app.name" :icon="app.icon" :msgCount="app.msgCount" :url="app.url"></app-launcher>
           </template>
           <template v-else>
-            <category :name="app.name" :msgCount="app.msgCount" :apps="app.apps" ref="category"
+            <category :name="app.name" :msgCount="app.msgCount" :apps="app.apps" :id="app.id"
                       @appInCategoryRemove="appInCategoryRemove" @categoryNameChange="categoryNameChange"></category>
           </template>
           </Col>
@@ -121,28 +121,21 @@
       }
     },
     mounted () {
-//      let categorys = JQuery('.noDrag')
-//      for (let i = 0; i < categorys.length; i++) {
-//        JQuery(categorys[i]).on('mouseenter', function () {
-//          JQuery('.noDrag').addClass('drag')
-//        })
-//        JQuery(categorys[i]).on('mouseleave', function () {
-//          JQuery('.noDrag').removeClass('drag')
-//        })
-//      }
-//      JQuery('.plus').parent().removeClass('noDrag')
-//      JQuery('.plus').on('click', function () {
-//        console.log(this.plusCategory)
-//        this.plusCategory = true
-//        alert('7777')
-//      })
+//      JQuery('.noDrag').addClass('drag')
     },
     updated () {
-      console.log('updated')
+//      JQuery('.noDrag').addClass('drag')
     },
     props: ['appList'],
     methods: {
-      categoryNameChange () {
+      categoryNameChange (obj) {
+        let id = obj.id
+        let changeName = obj.name
+        this.appList.forEach(function (item) {
+          if (item.id === id) {
+            item.name = changeName
+          }
+        })
         localStorage.setItem('appList', JSON.stringify(this.appList))
       },
       restoreDefault () {
@@ -335,42 +328,6 @@
                 content: '鼠标要在文件夹里面才拖得进去哦,再试一次吧(*^__^*)',
                 duration: 3
               })
-//              let count3 = 0
-//              for (let i = 0; i < appList.length; i++) {
-//                if (appList[i].isCategory) {
-//                  if (count3 === isMouseInCol.categoryDivIndex) {
-//                    let categoryX = JQuery(JQuery('.categoryDiv')[isMouseInCol.categoryDivIndex]).offset().left
-//                    if (mousePosition.x < categoryX) {
-//                      console.log('在文件夹左边')
-//                      for (let y = 0; y < appList.length; y++) {
-//                        if (appList[y].id === appIn.id) {
-//                          if (y < i) {
-//                            this.appList.splice(i, 0, appIn)
-//                            this.appList.splice(y, 1)
-//                          } else {
-//                            this.appList.splice(y, 1)
-//                            this.appList.splice(i, 0, appIn)
-//                          }
-//                        }
-//                      }
-//                    } else {
-//                      console.log('在文件夹右边')
-//                      for (let y = 0; y < appList.length; y++) {
-//                        if (appList[y].id === appIn.id) {
-//                        if (y < i) {
-//                          this.appList.splice(i + 1, 0, appIn)
-//                          this.appList.splice(y, 1)
-//                        } else {
-//                          this.appList.splice(y, 1)
-//                          this.appList.splice(i + 1, 0, appIn)
-//                        }
-//                        }
-//                      }
-//                    }
-//                  }
-//                  count3++
-//                }
-//              }
             }
           } else {
             this.$Message.info({
@@ -429,36 +386,6 @@
         let leftBottom = leftTwo > leftOne && leftTwo < leftOne + widthOne && topTwo + heightTwo > topOne && topTwo + heightTwo < topOne + heightOne
         let rightBottom = leftTwo + widthTwo > leftOne && leftTwo + widthTwo < leftOne + widthOne && topTwo + heightTwo > topOne && topTwo + heightTwo < topOne + heightOne
         return leftTop || rightTop || leftBottom || rightBottom
-      },
-      checkIfDragInCategory () {
-//        console.log('666')
-//        if (this.isOverlap('.ghost', '.categoryDiv')) {
-//          console.log('拖进来了')
-//        } else {
-//          console.log('没拖进来')
-//        }
-//        this.ListenMousePosition()
-//        let stratTime
-//        let endTime
-//        JQuery('.categoryDiv').hover(function () {
-//          console.log('777')
-//          stratTime = (new Date()).valueOf()
-//          console.log('stratTime1', stratTime)
-//          JQuery('.categoryDiv').mouseup(function () {
-//            console.log('stratTime2', stratTime)
-//            endTime = (new Date()).valueOf()
-//            console.log('endTime', endTime)
-//            if (endTime - stratTime > 2000) {
-//              console.log('放进文件夹')
-//            } else {
-//              console.log('交换顺序')
-//            }
-//            JQuery('.categoryDiv').off()
-//          })
-//        })
-      },
-      removeEventInCategory () {
-        console.log('7777')
       }
     },
     computed: {
